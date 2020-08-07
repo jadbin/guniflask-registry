@@ -51,14 +51,14 @@ http {
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
     gzip_vary on;
 
-    {{ range services }} {{ if ne .Name "consul" }}
+    {{ range services }} {{ if ne .Name "consul" }} {{ if service }}
     upstream {{ .Name }} {
         least_conn;
         {{ range service }}
         server {{ .Address }}:{{ .Port }} ;
         {{end}}
     }
-    {{end}} {{end}}
+    {{ end }} {{ end }} {{ end }}
 
     server {
         listen 8080;
@@ -69,10 +69,10 @@ http {
 
         server_name _;
 
-        {{ range services }} {{ if ne .Name "consul" }}
+        {{ range services }} {{ if ne .Name "consul" }} {{ if service }}
         location /{{ .Name }}/ {
             proxy_pass http://{{ .Name }}/;
         }
-        {{end}} {{end}}
+        {{ end }} {{ end }} {{ end }}
     }
 }
