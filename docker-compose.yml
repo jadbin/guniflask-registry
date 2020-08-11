@@ -2,9 +2,14 @@ version: '3'
 services:
   bundle:
     build: .
-    image: guniflask-registry
+    image: jadbin/guniflask-registry
     ports:
       - 8080:8080
+      - 8300:8300
+      - 8301:8301
+      - 8301:8301/udp
+      - 8302:8302
+      - 8302:8302/udp
       - 8500:8500
       - 8600:8600
       - 8600:8600/udp

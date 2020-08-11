@@ -24,7 +24,7 @@ RUN wget https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSIO
   && unzip /tmp/consul-template.zip -d /usr/local/bin \
   && rm /tmp/consul-template.zip
 
-EXPOSE 8080 8500 8600 8600/udp
+EXPOSE 8080 8300 8301 8301/udp 8302 8302/udp 8500 8600 8600/udp
 
 ADD ./ /opt/guniflask-registry
 WORKDIR /opt/guniflask-registry
